@@ -1,0 +1,59 @@
+include:
+  - consumer/consumer.go
+kind: ArchiveUploadSpec
+name: consumer-consumer-go-Ilco
+
+---
+apiVersion: fission.io/v1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: consumer-eb376d33-52ec-4666-be7d-f39258112460
+  namespace: default
+spec:
+  deployment:
+    checksum: {}
+  environment:
+    name: go
+    namespace: default
+  source:
+    checksum: {}
+    type: url
+    url: archive://consumer-consumer-go-Ilco
+status:
+  buildstatus: pending
+  lastUpdateTimestamp: "2020-07-16T06:30:11Z"
+
+---
+apiVersion: fission.io/v1
+kind: Function
+metadata:
+  creationTimestamp: null
+  name: consumer
+  namespace: default
+spec:
+  InvokeStrategy:
+    ExecutionStrategy:
+      ExecutorType: newdeploy
+      MaxScale: 40
+      MinScale: 40
+      SpecializationTimeout: 120
+      TargetCPUPercent: 80
+    StrategyType: execution
+  configmaps: null
+  environment:
+    name: go
+    namespace: default
+  functionTimeout: 60
+  idletimeout: 120
+  package:
+    functionName: Handler
+    packageref:
+      name: consumer-eb376d33-52ec-4666-be7d-f39258112460
+      namespace: default
+  resources:
+    limits:
+      cpu: 50m
+    requests:
+      cpu: 25m
+  secrets: null

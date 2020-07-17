@@ -1,0 +1,59 @@
+include:
+  - producer/producer.go
+kind: ArchiveUploadSpec
+name: producer-producer-go-OD6J
+
+---
+apiVersion: fission.io/v1
+kind: Package
+metadata:
+  creationTimestamp: null
+  name: producer-5275a89b-9eae-4119-991f-ec6889605853
+  namespace: default
+spec:
+  deployment:
+    checksum: {}
+  environment:
+    name: go
+    namespace: default
+  source:
+    checksum: {}
+    type: url
+    url: archive://producer-producer-go-OD6J
+status:
+  buildstatus: pending
+  lastUpdateTimestamp: "2020-07-16T05:49:20Z"
+
+---
+apiVersion: fission.io/v1
+kind: Function
+metadata:
+  creationTimestamp: null
+  name: producer
+  namespace: default
+spec:
+  InvokeStrategy:
+    ExecutionStrategy:
+      ExecutorType: newdeploy
+      MaxScale: 5
+      MinScale: 5
+      SpecializationTimeout: 120
+      TargetCPUPercent: 80
+    StrategyType: execution
+  configmaps: null
+  environment:
+    name: go
+    namespace: default
+  functionTimeout: 60
+  idletimeout: 120
+  package:
+    functionName: Handler
+    packageref:
+      name: producer-5275a89b-9eae-4119-991f-ec6889605853
+      namespace: default
+  resources:
+    limits:
+      cpu: 50m
+    requests:
+      cpu: 20m
+  secrets: null
