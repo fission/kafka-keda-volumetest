@@ -78,14 +78,13 @@ helm install redis-single --namespace redis \
     bitnami/redis
 #### END ####
 
-## Apply fission spec ##
-echo "Apply fission spec"
-fission spec apply
-#### END ####
-
-
 ## Remove ###
 echo "Removing temp"
 cd ..
 rm -rf temp
+#### END ####
+
+## Apply fission spec ##
+echo "Apply fission spec"
+fission spec apply
 #### END ####
