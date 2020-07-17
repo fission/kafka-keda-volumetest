@@ -56,6 +56,8 @@ kubectl wait kafka/my-cluster --for=condition=Ready --timeout=300s -n my-kafka-p
 sed -i -e "s/##suffix/$suffix/g" ../../kafka-cluster/response-topic.yaml
 sed -i -e "s/##suffix/$suffix/g" ../../kafka-cluster/request-topic.yaml
 sed -i -e "s/##suffix/$suffix/g" ../../kafka-cluster/error-topic.yaml
+sed -i -e "s/##suffix/$suffix/g" ../../specs/mqtrigger-kafkatest.yaml
+sed -i -e "s/##suffix/$suffix/g" ../../producer/producer.go
 
 # Creating topics
 echo "Creating Topics"

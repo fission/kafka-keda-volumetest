@@ -33,7 +33,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		ts := time.Now().Format(time.RFC3339)
 		message := fmt.Sprintf("{\"message_number\": %d, \"time_stamp\": \"%s\"}", msg, ts)
 		_, _, err = producer.SendMessage(&sarama.ProducerMessage{
-			Topic: "one-seven-request",
+			Topic: "request-topic-##suffix",
 			Value: sarama.StringEncoder(message),
 		})
 		_, _ = conn.Do("INCR", "produced")

@@ -7,7 +7,7 @@ metadata:
 spec:
   contentType: application/json
   cooldownPeriod: 30
-  errorTopic: one-seven-error
+  errorTopic: error-topic-##suffix
   functionref:
     functionweights: null
     name: consumer
@@ -18,9 +18,9 @@ spec:
   metadata:
     bootstrapServers: my-cluster-kafka-brokers.my-kafka-project.svc:9092
     consumerGroup: my-group
-    topic: one-seven-request
+    topic: request-topic-##suffix
   minReplicaCount: 0
   mqtkind: keda
   pollingInterval: 5
-  respTopic: one-seven-response
-  topic: one-seven-request
+  respTopic: response-topic-##suffix
+  topic: request-topic-##suffix
