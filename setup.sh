@@ -18,10 +18,11 @@ cd fission
 sed -i -e "s/<DOCKERHUB_REPO>/$DOCKERHUB_REPO/g" skaffold.yaml
 sed -i -e '/^ *prometheus:/,/^ *[^:]*:/s/enabled: true/enabled: false/' charts/fission-all/values.yaml
 TAG=$suffix skaffold run
-cd ..
 echo "Installing Fission CLI"
-curl -Lo fission https://github.com/fission/fission/releases/download/1.10.0/fission-cli-linux \
-    && chmod +x fission && sudo mv fission /usr/local/bin/
+cd cmd/fission-cli
+go build -o fission
+chmod +x fission && sudo mv fission /usr/local/bin/
+cd ../../../
 #### END ####
 
 ## Install KEDA ##
